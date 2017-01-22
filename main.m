@@ -14,13 +14,12 @@ clear all;
 clc;
 addpath(genpath('.\ksvdbox'));  % add K-SVD box
 addpath(genpath('.\OMPbox')); % add sparse coding algorithem OMP
-load('featurevectors.mat','training_feats', 'testing_feats', 'H_train', 'H_test');
-
+load('featurevectors_baseline_unbalanced.mat','training_feats', 'testing_feats', 'H_train', 'H_test');
 %% constant
 sparsitythres = 30; % sparsity prior
 sqrt_alpha = 4; % weights for label constraint term
 sqrt_beta = 2; % weights for classification err term
-dictsize = 500; % dictionary size
+dictsize = 50; % dictionary size
 iterations = 50; % iteration number
 iterations4ini = 20; % iteration number for initialization
 
@@ -46,5 +45,5 @@ fprintf('done!');
 %[prediction1,accuracy1] = classification(D1, W1, testing_feats, H_test, sparsitythres);
 %fprintf('\nFinal recognition rate for LC-KSVD1 is : %.03f ', accuracy1);
 
-[prediction2,accuracy2] = classification(D2, W2, testing_feats, H_test, sparsitythres);
-fprintf('\nFinal recognition rate for LC-KSVD2 is : %.03f ', accuracy2);
+[prediction2,accuracy2,err2] = classification(D2, W2, testing_feats, H_test, sparsitythres);
+fprintf('\nFinal accuracy for LC-KSVD2 is : %.03f ', accuracy2);
